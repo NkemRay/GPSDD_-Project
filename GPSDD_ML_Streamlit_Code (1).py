@@ -1,0 +1,76 @@
+import streamlit as st
+import joblib
+import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
+import pandas as pd 
+import statsmodels.api as sm
+
+# -------------------------------
+# Load trained model
+# -------------------------------
+model = joblib.load("Random_Regressor.pkl")  # <-- load your Ridge model here
+st.set_page_config(page_title="Malaria Prediction App", page_icon="🦟", layout="centered")
+
+# -------------------------------
+# App Header
+# -------------------------------
+st.markdown(
+    """
+    <h1 style='text-align: center; color: #2E86C1;'>🌍 Malaria Cases Prediction App</h1>
+    <p style='text-align: center; font-size: 18px;'>
+        Predict malaria cases (number of persons who tested positive by RDT) using rainfall, temperature, lagged features and fever-related features.  
+        <br>Use this tool for planning and deployment of targeted interventions, not for medical diagnosis.
+    </p>
+    """,
+    unsafe_allow_html=True
+)
+
+# -------------------------------
+# User Inputs
+# -------------------------------
+st.subheader("📥 Enter Input Features")
+
+col1, col2 = st.columns(2)
+
+with col1:
+    person_fever = st.number_input("Persons with Fever", min_value=0.0, step=0.1)
+    rainfall = st.number_input("Rainfall (mm)", min_value=0.0, step=0.1)
+    rainfall_lag1 = st.number_input("Rainfall Lag 1", min_value=0.0, step=0.1)
+    temperature_lag5 = st.number_input("Temperature Lag 5", min_value=0.0, step=0.1)
+
+with col2:
+    temperature = st.number_input("Temperature (°C)", min_value=0.0, step=0.1)
+    rainfall_lag2 = st.number_input("Rainfall Lag 2", min_value=0.0, step=0.1)
+    temperature_lag6 = st.number_input("Temperature Lag 6", min_value=0.0, step=0.1)
+
+# -------------------------------
+# Prediction
+# -------------------------------
+if st.button("🔮 Predict Malaria Cases"):
+    features = np.array([[
+        person_fever,
+        rainfall,
+        temperature,
+        rainfall_lag1,
+        rainfall_lag2,
+        temperature_lag5,
+        temperature_lag6
+    ]])
+
+    prediction = model.predict(features)[0]
+    st.success(f"✅ Predicted Malaria Cases: {int(prediction)}")
+
+# -------------------------------
+# Disclaimer
+# -------------------------------
+st.markdown(
+    """
+    <hr>
+    <p style='font-size: 14px; color: gray; text-align: center;'>
+    ⚠️ <b>Disclaimer:</b> This tool is intended for <b>research and public health planning</b> only.  
+    It does <b>not provide medical diagnosis</b>. For personal health concerns, please consult a qualified healthcare provider.  
+    </p>
+    """,
+    unsafe_allow_html=True
+)
