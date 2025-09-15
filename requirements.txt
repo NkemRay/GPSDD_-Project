@@ -6,6 +6,7 @@ scikit_learn
 seaborn
 statsmodels
 streamlit
+openpyxl
 
 
 
