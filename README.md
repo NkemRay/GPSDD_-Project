@@ -4,7 +4,7 @@ This project focuses on understanding the relationship between climatic factors,
 The outcome of this project is to provide a pilot policy brief for proactive decion making by policy makers to enable the elimination of malaria in Nigeria.
 The state use for this case study is Benue state having the following data variables such as Temperature, Rainfall, Persons who tested positive for malaria, the 23 LGA and persons with fever.
 
-The project further trained and deployed an AI model that predicts the number of malaria cases based off input parameters such as Rainfall(mm), Temperature (degree celsuis), lagged features and persons with fever. The model trained is to help policy makers targeted interventions program considering the climatic and extrem conditions such as flooding. You can find the delopyed model here: 
+The project further trained and deployed an AI model that predicts the number of malaria cases based off input parameters such as Rainfall(mm), Temperature (degree celsuis), lagged features and persons with fever. The model trained is to help policy makers targeted interventions program considering the climatic and extrem conditions such as flooding. You can find the delopyed model here: https://gpsdd-project-k.streamlit.app/
 
 ## Limitations
 
