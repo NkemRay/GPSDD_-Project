@@ -9,7 +9,7 @@ import statsmodels.api as sm
 # -------------------------------
 # Load trained model
 # -------------------------------
-model = joblib.load("malaria_rf_model.joblib")
+model = joblib.load("malaria_rf_model (2).joblib")
 st.set_page_config(page_title="Malaria Prediction App", page_icon="🦟", layout="centered")
 
 # -------------------------------
@@ -105,3 +105,4 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+
