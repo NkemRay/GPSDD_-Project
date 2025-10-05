@@ -9,7 +9,6 @@ import statsmodels.api as sm
 # -------------------------------
 # Load trained model
 # -------------------------------
-
 model = joblib.load("malaria_rf_model.joblib")
 st.set_page_config(page_title="Malaria Prediction App", page_icon="🦟", layout="centered")
 
@@ -46,9 +45,9 @@ with col2:
     temperature_lag6 = st.number_input("Temperature Lag 6", min_value=0.0, step=0.1)
 
 # -------------------------------
-# Prediction
+# Prediction (Basic)
 # -------------------------------
-if st.button("🔮 Predict Malaria Cases"):
+if st.button("🔮 Predict Malaria Cases", key="basic_prediction"):
     features = np.array([[
         person_fever,
         rainfall,
@@ -65,7 +64,7 @@ if st.button("🔮 Predict Malaria Cases"):
 # -------------------------------
 # Prediction (with Uncertainty)
 # -------------------------------
-if st.button("🔮 Predict Malaria Cases"):
+if st.button("🔮 Predict Malaria Cases (with Uncertainty)", key="uncertainty_prediction"):
     features_input = np.array([[
         person_fever,
         rainfall,
@@ -88,11 +87,10 @@ if st.button("🔮 Predict Malaria Cases"):
 
     st.success(f"✅ Predicted Malaria Cases: {int(mean_prediction)}")
     st.info(
-        f"**Uncertainty Level (95% Prediction Interval):**"
-        f" The number of cases is likely to be between **{int(lower_bound)}** and **{int(upper_bound)}**."
+        f"**Uncertainty Level (95% Prediction Interval):** "
+        f"The number of cases is likely to be between **{int(lower_bound)}** and **{int(upper_bound)}**."
     )
     st.warning(f"**Error Margin (Standard Deviation):** The prediction's variability is approximately **±{std_dev:.2f}**.")
-
 
 # -------------------------------
 # Disclaimer
